@@ -1362,7 +1362,7 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-  - react-native-safe-area-context (5.7.0):
+  - react-native-safe-area-context (5.8.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1374,8 +1374,8 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-safe-area-context/common (= 5.7.0)
-    - react-native-safe-area-context/fabric (= 5.7.0)
+    - react-native-safe-area-context/common (= 5.8.0)
+    - react-native-safe-area-context/fabric (= 5.8.0)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1386,7 +1386,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-safe-area-context/common (5.7.0):
+  - react-native-safe-area-context/common (5.8.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1408,7 +1408,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-safe-area-context/fabric (5.7.0):
+  - react-native-safe-area-context/fabric (5.8.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1957,6 +1957,28 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
+  - RNVectorIcons (10.3.0):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
   - RNWorklets (0.8.3):
     - hermes-engine
     - RCTRequired
@@ -2108,6 +2130,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - RNWorklets (from `../node_modules/react-native-worklets`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -2265,6 +2288,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
   RNWorklets:
     :path: "../node_modules/react-native-worklets"
   Yoga:
@@ -2309,7 +2334,7 @@ SPEC CHECKSUMS:
   React-logger: 4e7583fb51ef2aa76b298c88e1b9a5cff83e03f7
   React-Mapbuffer: 820bc13d35de93c05aacefb3ab43f061b247c64e
   React-microtasksnativemodule: d8115c4d1035b8671c036a47d82fe75d1ca44e44
-  react-native-safe-area-context: 6b4966397ada0f7dd481e4486a2ef936834861a1
+  react-native-safe-area-context: fb5c8ee9f6dd62ef710611b3d370c501f42a4ac0
   React-NativeModulesApple: 647d3ab78e02b3a40fedffd856744215219ff0a6
   React-networking: 8d40769c4823a7e26ae98ca5cd691edc87828743
   React-oscompat: 934d246490699f24fb70bbc5ca0da7e6808ab80c
@@ -2347,6 +2372,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: 2ff61eac036eaf89f6818bf4ed9c39771a17d134
   RNReanimated: f735b1747a7a93bda7ca102c6d37a3cf54b6d5e8
   RNSVG: 0e52210d4d43165e7e2cf9c890a9848b27e513ac
+  RNVectorIcons: 97f26211c07d69e45b189f9dd0dbbe5e2d2b0b92
   RNWorklets: 4931990f73bc8f347586918b2e13f11dfadf3b75
   Yoga: b1085f68c014785350a2afdc95eaef0d49f23ccb
 
