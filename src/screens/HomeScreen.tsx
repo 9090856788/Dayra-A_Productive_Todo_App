@@ -1,5 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
 import {
+  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 import React, { useState } from 'react';
-import Header from '../components/Header';
 import FloatingActionButton from '../components/FloatingActionButton';
 import TaskList from '../components/TaskItem';
 import Modal from 'react-native-modal';
@@ -44,19 +43,31 @@ const HomeScreen = () => {
     <View style={styles.container}>
       {/* Header Layer  */}
       <View style={styles.header}>
-        <Header title="DAYRA" headerStyle={{ color: 'orange' }} />
+        <Image
+          source={require('../assets/images/logo1.png')}
+          style={styles.logo}
+        />
       </View>
 
-      {/* Tasklist Content Layer */}
+      {/* Tasklist Content */}
       <View style={styles.taskListContainer}>
-        <TaskList tasks={taskList} />
+        {taskList.length === 0 ? (
+          <View style={styles.noTasksContainer}>
+            <Image
+              source={require('../assets/images/noTask.png')}
+              style={styles.noTasksImage}
+            />
+          </View>
+        ) : (
+          <TaskList tasks={taskList} />
+        )}
       </View>
 
       {/* FAB Layer  */}
       <View style={styles.fabContainer}>
         <FloatingActionButton
           onPress={handleOpenModal}
-          // backgroundColor="orange"
+          backgroundColor="#8687E7"
           icon="add"
           right={18}
           bottom={10}
@@ -111,13 +122,31 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 0.1,
-    borderWidth: 1,
-    borderColor: '#4ce123',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logo: {
+    width: 300,
+    height: 100,
+    alignSelf: 'center',
+    // resizeMode: 'contain',
   },
   taskListContainer: {
     flex: 0.8,
     borderWidth: 1,
     borderColor: '#4ce123',
+  },
+  noTasksContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
+  noTasksImage: {
+    width: 300,
+    height: 400,
+    marginBottom: 20,
   },
   fabContainer: {
     flex: 0.1,
@@ -162,7 +191,7 @@ const styles = StyleSheet.create({
   },
 
   addBtn: {
-    backgroundColor: 'orange',
+    backgroundColor: '#8687E7',
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 8,
