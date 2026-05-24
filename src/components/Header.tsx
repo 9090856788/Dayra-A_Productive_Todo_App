@@ -24,7 +24,6 @@ export default Header;
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: '#f8f8f8',
     alignItems: 'center',
     justifyContent: 'center',
   },
