@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   StyleSheet,
   Text,
@@ -8,12 +9,19 @@ import {
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import FloatingActionButton from '../components/FloatingActionButton';
-import TaskList from '../components/TaskList';
+import TaskList from '../components/TaskItem';
 import Modal from 'react-native-modal';
+
+type Task = {
+  id: string;
+  title: string;
+  completed: boolean;
+};
 
 const HomeScreen = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [task, setTask] = useState('');
+  const [taskList, setTaskList] = useState<Task[]>([]);
 
   const handleOpenModal = () => {
     setIsModalVisible(true);
@@ -22,8 +30,13 @@ const HomeScreen = () => {
   const handleAddTask = () => {
     if (!task.trim()) return;
 
-    console.log('Task:', task);
+    const newTask: Task = {
+      id: Date.now().toString(),
+      title: task,
+      completed: false,
+    };
 
+    setTaskList(prevTasks => [...prevTasks, newTask]);
     setTask('');
     setIsModalVisible(false);
   };
@@ -31,12 +44,12 @@ const HomeScreen = () => {
     <View style={styles.container}>
       {/* Header Layer  */}
       <View style={styles.header}>
-        <Header title="DAYRA" />
+        <Header title="DAYRA" headerStyle={{ color: 'orange' }} />
       </View>
 
       {/* Tasklist Content Layer */}
       <View style={styles.taskListContainer}>
-        <TaskList />
+        <TaskList tasks={taskList} />
       </View>
 
       {/* FAB Layer  */}
