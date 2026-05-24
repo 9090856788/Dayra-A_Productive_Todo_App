@@ -15,6 +15,7 @@ interface FloatingActionButtonProps {
   borderRadius?: number;
   bottom?: number;
   left?: number;
+  right?: number;
   style?: ViewStyle;
 }
 
@@ -26,10 +27,12 @@ const FloatingActionButton: FC<FloatingActionButtonProps> = ({
   borderRadius,
   bottom,
   left,
+  right,
 }) => {
   const dynamicStyle: ViewStyle = {
     bottom,
     left,
+    right,
     width: size,
     height: size,
     borderRadius: borderRadius ?? size / 2,
@@ -51,12 +54,12 @@ export default FloatingActionButton;
 
 const styles = StyleSheet.create({
   fab: {
-    position: 'absolute',
+    position: 'absolute', // ✅ keep only this
     justifyContent: 'center',
     alignItems: 'center',
-    // for android shadow
+
     elevation: 6,
-    // for iOS shadow
+
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,

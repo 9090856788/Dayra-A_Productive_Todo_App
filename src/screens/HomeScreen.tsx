@@ -1,40 +1,55 @@
-import React, { useState } from 'react';
 import {
   StyleSheet,
-  View,
   Text,
   TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import Modal from 'react-native-modal';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import FloatingActionButton from '../components/FloatingActionButton';
+import TaskList from '../components/TaskList';
+import Modal from 'react-native-modal';
 
 const HomeScreen = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [task, setTask] = useState('');
 
-  const handleAddTask = () => {
-    console.log('Task:', task);
-    setTask('');
+  const handleOpenModal = () => {
     setIsModalVisible(true);
   };
 
+  const handleAddTask = () => {
+    if (!task.trim()) return;
+
+    console.log('Task:', task);
+
+    setTask('');
+    setIsModalVisible(false);
+  };
   return (
     <View style={styles.container}>
-      <Header title="To Do App" />
+      {/* Header Layer  */}
+      <View style={styles.header}>
+        <Header title="DAYRA" />
+      </View>
 
-      {/* FAB Component */}
-      <FloatingActionButton
-        onPress={handleAddTask}
-        borderRadius={8}
-        backgroundColor="orange"
-        icon="add"
-        left={170}
-        bottom={60}
-      />
+      {/* Tasklist Content Layer */}
+      <View style={styles.taskListContainer}>
+        <TaskList />
+      </View>
 
-      {/* SMOOTH MODAL */}
+      {/* FAB Layer  */}
+      <View style={styles.fabContainer}>
+        <FloatingActionButton
+          onPress={handleOpenModal}
+          // backgroundColor="orange"
+          icon="add"
+          right={18}
+          bottom={10}
+        />
+      </View>
+      {/* Modal for adding task */}
       <Modal
         isVisible={isModalVisible}
         onBackdropPress={() => setIsModalVisible(false)}
@@ -62,7 +77,7 @@ const HomeScreen = () => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={handleAddTask} style={styles.addBtn}>
-              <Text>Add</Text>
+              <Text style={styles.addBtnText}>Add</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -72,9 +87,29 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    borderWidth: 1,
+    borderColor: '#f66262',
+    gap: 10,
+    padding: 16,
+  },
+  header: {
+    flex: 0.1,
+    borderWidth: 1,
+    borderColor: '#4ce123',
+  },
+  taskListContainer: {
+    flex: 0.8,
+    borderWidth: 1,
+    borderColor: '#4ce123',
+  },
+  fabContainer: {
+    flex: 0.1,
+    borderWidth: 1,
+    borderColor: '#633fdb',
   },
 
   modal: {
@@ -118,5 +153,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 8,
+  },
+
+  addBtnText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });
