@@ -41,14 +41,13 @@ const TaskList: FC<TaskListProps> = ({ tasks, onToggle, onDelete }) => {
         keyExtractor={item => item.id}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
-        scrollEnabled={false}
+        scrollEnabled={true}
       />
     </View>
   );
 };
 
 export default TaskList;
-
 
 const styles = StyleSheet.create({
   container: {

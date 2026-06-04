@@ -4,10 +4,10 @@ import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
 import Ionicons from '@react-native-vector-icons/ionicons';
 
 // SCREENS
-import HomeScreen from '../screens/HomeScreen';
-import CalenderScreen from '../screens/CalenderScreen';
-import FocusScreen from '../screens/FocusScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import HomeScreen from '../screens/home/HomeScreen';
+import CalendarScreen from '../screens/calendar/CalendarScreen';
+import FocusScreen from '../screens/focus/FocusScreen';
+import ProfileScreen from '../screens/profile/ProfileScreen';
 
 //  CUSTOM FAB
 import FloatingActionButton from '../components/FloatingActionButton';
@@ -87,7 +87,7 @@ const CurvedTabsContent: FC = () => {
       <CurvedBottomBar.Screen
         name="Calendar"
         position="LEFT"
-        component={CalenderScreen}
+        component={CalendarScreen}
         options={{ headerShown: false }}
       />
 
