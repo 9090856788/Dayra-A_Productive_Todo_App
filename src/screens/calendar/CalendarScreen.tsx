@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import React, { FC } from 'react';
 import { Calendar } from 'react-native-calendars';
 import TaskList from '../../components/TaskItem';
@@ -21,11 +21,8 @@ const CalendarScreen: FC = () => {
 
       {/* task status content */}
       <View style={styles.taskStatusContainer}>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta
-          repellat odit mollitia consequuntur, ratione consequatur dolores
-          eveniet hic ad quisquam.
-        </Text>
+        <Button title="Click Me" onPress={() => console.log('Pressed')} />
+        <Button title="Click Me" onPress={() => console.log('Pressed')} />
       </View>
       {/* Tasklist Content */}
       <View style={styles.taskListContainer}>
@@ -61,6 +58,9 @@ const styles = StyleSheet.create({
     borderColor: 'green',
   },
   taskStatusContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
     flex: 0.1,
     borderWidth: 1,
     borderColor: 'blue',
