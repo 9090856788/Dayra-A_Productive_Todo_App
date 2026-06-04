@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native';
-import React from 'react';
+import React, { FC } from 'react';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import HomeScreen from './src/screens/HomeScreen';
+import Navigation from './src/navigation/Navigation';
 
-const App = () => {
+const App: FC = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-        <HomeScreen />
+        <Navigation />
       </SafeAreaView>
     </SafeAreaProvider>
   );

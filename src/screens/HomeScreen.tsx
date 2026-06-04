@@ -1,44 +1,12 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React, { useState } from 'react';
-import FloatingActionButton from '../components/FloatingActionButton';
+import { View, StyleSheet, Image, Text } from 'react-native';
+import React from 'react';
 import TaskList from '../components/TaskItem';
-import Modal from 'react-native-modal';
-
-type Task = {
-  id: string;
-  title: string;
-  completed: boolean;
-};
+import AddTaskModal from '../components/AddTaskModal';
+import { useTask } from '../context/TaskContext';
 
 const HomeScreen = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [task, setTask] = useState('');
-  const [taskList, setTaskList] = useState<Task[]>([]);
+  const { tasks, deleteTask, toggleTask } = useTask();
 
-  const handleOpenModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleAddTask = () => {
-    if (!task.trim()) return;
-
-    const newTask: Task = {
-      id: Date.now().toString(),
-      title: task,
-      completed: false,
-    };
-
-    setTaskList(prevTasks => [...prevTasks, newTask]);
-    setTask('');
-    setIsModalVisible(false);
-  };
   return (
     <View style={styles.container}>
       {/* Header Layer  */}
@@ -49,63 +17,35 @@ const HomeScreen = () => {
         />
       </View>
 
+      {/* Task Count Info */}
+      {tasks.length > 0 && (
+        <View style={styles.infoBar}>
+          <Text style={styles.infoText}>
+            {tasks.filter(t => !t.completed).length} of {tasks.length} tasks
+          </Text>
+        </View>
+      )}
+
       {/* Tasklist Content */}
       <View style={styles.taskListContainer}>
-        {taskList.length === 0 ? (
+        {tasks.length === 0 ? (
           <View style={styles.noTasksContainer}>
             <Image
               source={require('../assets/images/noTask.png')}
               style={styles.noTasksImage}
             />
+            <Text style={styles.noTasksText}>No tasks yet!</Text>
+            <Text style={styles.noTasksSubtext}>
+              Tap the + button to add your first task
+            </Text>
           </View>
         ) : (
-          <TaskList tasks={taskList} />
+          <TaskList tasks={tasks} onToggle={toggleTask} onDelete={deleteTask} />
         )}
       </View>
 
-      {/* FAB Layer  */}
-      <View style={styles.fabContainer}>
-        <FloatingActionButton
-          onPress={handleOpenModal}
-          backgroundColor="#8687E7"
-          icon="add"
-          right={18}
-          bottom={10}
-        />
-      </View>
-      {/* Modal for adding task */}
-      <Modal
-        isVisible={isModalVisible}
-        onBackdropPress={() => setIsModalVisible(false)}
-        animationIn="slideInUp"
-        animationOut="slideOutDown"
-        backdropOpacity={0.5}
-        style={styles.modal}
-      >
-        <View style={styles.modalContainer}>
-          <Text style={styles.title}>Add Task</Text>
-
-          <TextInput
-            placeholder="Enter your task..."
-            value={task}
-            onChangeText={setTask}
-            style={styles.input}
-          />
-
-          <View style={styles.buttonRow}>
-            <TouchableOpacity
-              onPress={() => setIsModalVisible(false)}
-              style={styles.cancelBtn}
-            >
-              <Text>Cancel</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={handleAddTask} style={styles.addBtn}>
-              <Text style={styles.addBtnText}>Add</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+      {/* Add Task Modal */}
+      <AddTaskModal />
     </View>
   );
 };
@@ -115,14 +55,12 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: '#f66262',
     gap: 10,
     padding: 16,
+    backgroundColor: '#fff',
   },
   header: {
     flex: 0.1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -130,12 +68,23 @@ const styles = StyleSheet.create({
     width: 300,
     height: 100,
     alignSelf: 'center',
-    // resizeMode: 'contain',
+  },
+  infoBar: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 8,
+    marginBottom: 5,
+  },
+  infoText: {
+    fontSize: 14,
+    color: '#666',
+    fontWeight: '500',
   },
   taskListContainer: {
     flex: 0.8,
-    borderWidth: 1,
-    borderColor: '#4ce123',
+    borderRadius: 12,
+    overflow: 'hidden',
   },
   noTasksContainer: {
     flex: 1,
@@ -147,6 +96,16 @@ const styles = StyleSheet.create({
     width: 300,
     height: 400,
     marginBottom: 20,
+  },
+  noTasksText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+  },
+  noTasksSubtext: {
+    fontSize: 14,
+    color: '#999',
   },
   fabContainer: {
     flex: 0.1,
