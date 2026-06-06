@@ -1,12 +1,13 @@
-import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React, { FC } from 'react';
+import { navigate } from '../../utils/NavigationUtil';
 
 const OnboardingScreen: FC = () => {
   return (
     <View style={styles.container}>
       {/* Heading area */}
       <View style={styles.heading}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigate('StartScreen')}>
           <Text style={styles.headingContent}>SKIP</Text>
         </TouchableOpacity>
       </View>
@@ -18,8 +19,12 @@ const OnboardingScreen: FC = () => {
 
       {/* Footer area content will go here */}
       <View style={styles.footer}>
-        <Button title=" BACK" onPress={() => console.log('Pressed')} />
-        <Button title="NEXT" onPress={() => console.log('Pressed')} />
+        <TouchableOpacity
+          style={styles.nextButton}
+          onPress={() => navigate('StartScreen')}
+        >
+          <Text>NEXT</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -36,13 +41,13 @@ const styles = StyleSheet.create({
   },
   heading: {
     flex: 0.05,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: 'blue',
   },
   headingContent: {
-    fontSize: 18,
+    fontSize: 16,
   },
   mainContent: {
     flex: 0.8,
@@ -51,10 +56,19 @@ const styles = StyleSheet.create({
   },
   footer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
     flex: 0.1,
+    width: '100%',
     borderWidth: 1,
     borderColor: 'green',
+  },
+  nextButton: {
+    width: '90%',
+    paddingVertical: 14,
+    backgroundColor: '#8875FF',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
