@@ -130,14 +130,14 @@ const styles = StyleSheet.create({
 
   title: {
     color: '#000',
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: '700',
     textAlign: 'center',
   },
 
   description: {
     color: '#000',
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'center',
     marginTop: 10,
   },
