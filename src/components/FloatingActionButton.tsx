@@ -54,7 +54,7 @@ export default FloatingActionButton;
 
 const styles = StyleSheet.create({
   fab: {
-    position: 'absolute', // ✅ keep only this
+    position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
 

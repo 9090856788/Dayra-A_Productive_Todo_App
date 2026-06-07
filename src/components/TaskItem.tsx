@@ -6,12 +6,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, { FC } from 'react';
-
-type Task = {
-  id: string;
-  title: string;
-  completed: boolean;
-};
+import { Task } from '../context/TaskContext';
+import Checkbox from './Checkbox';
 
 type TaskListProps = {
   tasks: Task[];
@@ -22,25 +18,19 @@ type TaskListProps = {
 const TaskList: FC<TaskListProps> = ({ tasks, onToggle, onDelete }) => {
   const renderItem = ({ item }: { item: Task }) => (
     <View style={styles.card}>
-      <TouchableOpacity activeOpacity={0.7} onPress={() => onToggle?.(item.id)}>
+      <Checkbox checked={item.completed} onToggle={() => onToggle?.(item.id)} />
+      <View style={styles.taskContent}>
         <Text style={[styles.text, item.completed && styles.completedText]}>
           {item.title}
         </Text>
-      </TouchableOpacity>
-
-      <View style={styles.actions}>
-        <TouchableOpacity activeOpacity={0.7}>
-          <Text style={styles.editText}>Edit</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.iconSpacing}
-          onPress={() => onDelete?.(item.id)}
-        >
-          <Text style={styles.deleteText}>Delete</Text>
-        </TouchableOpacity>
+        {item.description && (
+          <Text style={styles.description}>{item.description}</Text>
+        )}
       </View>
+
+      <TouchableOpacity activeOpacity={0.7} onPress={() => onDelete?.(item.id)}>
+        <Text style={styles.deleteText}>Delete</Text>
+      </TouchableOpacity>
     </View>
   );
 
@@ -51,6 +41,7 @@ const TaskList: FC<TaskListProps> = ({ tasks, onToggle, onDelete }) => {
         keyExtractor={item => item.id}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
+        scrollEnabled={true}
       />
     </View>
   );
@@ -61,7 +52,7 @@ export default TaskList;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    paddingHorizontal: 16,
   },
 
   card: {
@@ -75,36 +66,32 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 
-  text: {
+  taskContent: {
     flex: 1,
     marginLeft: 12,
+  },
+
+  text: {
     fontSize: 16,
     color: '#333',
+    fontWeight: '500',
   },
 
   completedText: {
     textDecorationLine: 'line-through',
     color: '#aaa',
+    fontWeight: '400',
   },
 
-  actions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  iconSpacing: {
-    marginLeft: 15,
-  },
-
-  editText: {
-    color: '#555',
-    fontSize: 14,
-    fontWeight: '500',
+  description: {
+    fontSize: 13,
+    color: '#888',
+    marginTop: 4,
   },
 
   deleteText: {
     color: '#ff4d4d',
-    fontSize: 14,
-    fontWeight: '500',
+    fontSize: 13,
+    fontWeight: '600',
   },
 });
