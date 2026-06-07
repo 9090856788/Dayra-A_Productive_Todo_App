@@ -1,9 +1,27 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import React, { FC } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Animated,
+  Dimensions,
+} from 'react-native';
+import React, { FC, useRef, useEffect } from 'react';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { goBack, navigate } from '../../utils/NavigationUtil';
+const { width, height } = Dimensions.get('window');
 
 const StartScreen: FC = () => {
+  const scaleAnim = useRef(new Animated.Value(0.5)).current;
+
+  useEffect(() => {
+    Animated.timing(scaleAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  });
+
   return (
     <View style={styles.container}>
       {/* Header content area will go here */}
@@ -28,9 +46,9 @@ const StartScreen: FC = () => {
         </View>
         {/* welcome image will go here */}
         <View>
-          <Image
-            source={require('../../assets/images/welcome.png')}
-            style={styles.welcomeImage}
+          <Animated.Image
+            source={require('../../assets/images/welcome1.png')}
+            style={[styles.welcomeImage, { transform: [{ scale: scaleAnim }] }]}
           />
         </View>
       </View>
@@ -89,10 +107,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   welcomeImage: {
-    width: 400,
-    height: 400,
+    width: width * 0.8,
+    height: height * 0.5,
     resizeMode: 'contain',
-    padding: 20,
   },
   footer: {
     flex: 0.2,
